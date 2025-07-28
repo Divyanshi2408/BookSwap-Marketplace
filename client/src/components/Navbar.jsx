@@ -8,7 +8,7 @@ export default function Navbar() {
     navigate("/login");
   };
   return (
-    <nav className="p-4 flex justify-between bg-blue-600 text-white">
+    <nav className="p-4 flex justify-between bg-[#FFE86F] text-black">
       <div>
         <Link to="/" className="mr-4">Home</Link>
         <Link to="/add-book" className="mr-4">Add Book</Link>
