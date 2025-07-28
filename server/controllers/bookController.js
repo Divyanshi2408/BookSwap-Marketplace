@@ -11,10 +11,11 @@ exports.addBook = async (req, res) => {
 };
 
 exports.getAllBooks = async (req, res) => {
-  const books = await Book.find().populate("postedBy", "name");
+  const books = await Book.find()
+    .populate("postedBy", "name")
+    .sort({ createdAt: -1 }); 
   res.json(books);
 };
-
 exports.getMyBooks = async (req, res) => {
   const books = await Book.find({ postedBy: req.user.id });
   res.json(books);
