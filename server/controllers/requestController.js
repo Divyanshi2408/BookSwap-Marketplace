@@ -20,3 +20,20 @@ exports.updateRequestStatus = async (req, res) => {
   await Request.findByIdAndUpdate(req.params.id, { status });
   res.json({ msg: "Status updated" });
 };
+exports.getReceivedRequests = async (req, res) => {
+  try {
+    // Find requests where the book is posted by current user
+    const requests = await Request.find()
+      .populate({
+        path: 'book',
+        match: { postedBy: req.user.id },
+      })
+      .populate('requestedBy', 'name');
+
+    // Filter out requests where book doesn't match
+    const filtered = requests.filter((r) => r.book !== null);
+    res.json(filtered);
+  } catch (err) {
+    res.status(500).json({ msg: 'Failed to fetch received requests' });
+  }
+};
