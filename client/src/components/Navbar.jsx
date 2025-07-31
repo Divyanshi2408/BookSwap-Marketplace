@@ -23,6 +23,7 @@ export default function Navbar() {
           <Link to="/my-books" className="hover:underline">My Books</Link>
           <Link to="/my-requests" className="hover:underline">My Requests</Link>
           <Link to="/received-requests" className="hover:underline">Received Requests</Link>
+          <Link to="/dashboard" className="hover:underline">Dashboard</Link>
           {isLoggedIn ? (
             <button onClick={logout} className="bg-black text-white px-3 py-1 rounded hover:bg-gray-800">
               Logout

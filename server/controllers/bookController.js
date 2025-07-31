@@ -11,7 +11,7 @@ exports.addBook = async (req, res) => {
 };
 
 exports.getAllBooks = async (req, res) => {
-  const books = await Book.find()
+  const books = await Book.find({available:true})
     .populate("postedBy", "name")
     .sort({ createdAt: -1 }); 
   res.json(books);
@@ -24,4 +24,14 @@ exports.getMyBooks = async (req, res) => {
 exports.deleteBook = async (req, res) => {
   await Book.findByIdAndDelete(req.params.id);
   res.json({ msg: "Book deleted" });
+};
+
+exports.toogleAvailability = async (req, res)=>{
+  const book = await Book.findById(req.params.id);
+  if(!book) return res.status(404).json({msg:"book not found"});
+  if(book.postedBy.toString() !== req.user.id) return res.status(403).json({msg:unauthorized});
+
+  book.available = !book.available;
+  await book.save();
+  res.json({available:book.available});
 };

@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import ReceivedRequests from "./pages/ReceivedRequests";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/my-books" element={<MyBooks />} />
         <Route path="/my-requests" element={<MyRequests />} />
         <Route path="/received-requests" element={<ReceivedRequests />} />
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
       <ToastContainer />
     </Router>

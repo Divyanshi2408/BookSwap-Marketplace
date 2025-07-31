@@ -37,3 +37,18 @@ exports.getReceivedRequests = async (req, res) => {
     res.status(500).json({ msg: 'Failed to fetch received requests' });
   }
 };
+
+exports.getSwapHistory = async(req,res) =>{
+  try{
+    const swaps =await Request.find({
+      requestedBy:req.user.id,
+      status: 'accepted'
+    }).populate('book');
+
+    res.json(swaps)
+  }
+  catch(err){
+    res.status(500).json({msg:"failed to load"})
+
+  }
+};

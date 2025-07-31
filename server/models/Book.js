@@ -5,6 +5,7 @@ const bookSchema = new mongoose.Schema({
   author: String,
   condition: String,
   image: String,
+  available:{type:Boolean,default:true},
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 }, { timestamps: true }); 
 

@@ -20,6 +20,12 @@ export default function MyBooks() {
       .catch(() => toast.error("Delete failed"));
   };
 
+  const toogleAvailabilty = (id) =>{
+    API.patch(`/books/toogle/${id}`)
+    .then(() => fetchBooks())
+    .catch(() => toast.error("Toggle failed"));
+  }
+
   useEffect(fetchBooks, []);
 
   return (
@@ -44,6 +50,9 @@ export default function MyBooks() {
               <p className="text-sm text-gray-600 text-center">
                 {book.author} | {book.condition}
               </p>
+              <button  className="btn" onClick={() => toogleAvailabilty(book._id)}>
+                {book.available ? "Mark Unavailable" : "Mark Available"}
+              </button>
               <button
                 onClick={() => handleDelete(book._id)}
                 className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded w-full text-sm"
